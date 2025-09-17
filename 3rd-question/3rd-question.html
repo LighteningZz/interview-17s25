@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3rd Question</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body class="min-h-screen bg-gray-500 flex items-center justify-center p-4 ">
+    <div class="w-full max-w-2xl">
+        <div class="bg-white rounded-sm shadow-md p-8">
+            <form id="form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <input type="text" name="displayValue" required
+                            class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Display Value">
+                    </div>
+                    <div>
+                        <input type="number" name="characterLength" required
+                            class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Character Length">
+                    </div>
+                    <div>
+                        <input type="number" name="lastName" required
+                            class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit"
+                        class="w-full rounded-sm text-gray-200 font-semibold text-md py-2 transition duration-300 bg-gradient-to-t from-green-600 to-green-400  hover:from-green-700 hover:to-green-600">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const input = event.target.querySelectorAll('input')
+            const displayValue = input[0].value;
+            const characterLength = input[1].value;
+            const loopLength = input[2].value;
+            let output = ''
+            for (let loop = 0; loop < loopLength; loop++) {
+                for (let char = 0; char < characterLength; char++) {
+                    for (let i = 0; i < char; i++) {
+                        output += displayValue;
+                    }
+                    output += '\n'
+                }
+                for (let char = characterLength; char >= 1; char--) {
+                    for (let i = 0; i < char; i++) {
+                        output += displayValue;
+                    }
+                    output += '\n'
+                }
+                output = output.trim()
+            }
+            let div = document.getElementById('output')
+            if (!div) {
+                div = document.createElement('div')
+                div.id = 'output'
+                div.classList.add('bg-gray-300')
+                div.classList.add('p-4')
+                div.classList.add('mt-4')
+                event.target.parentNode.appendChild(div)
+            }
+            div.innerHTML = '';
+            const outputTextElement = document.createElement('pre');
+            outputTextElement.classList.add('text-pretty')
+            outputTextElement.innerText = output
+            div.append(outputTextElement)
+        });
+    </script>
+</body>
+
+</html>

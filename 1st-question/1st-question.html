@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-gray-500 flex items-center justify-center p-4 ">
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-sm shadow-md p-8">
+            <div class="text-center mb-8">
+                <h1 class="relative flex items-center text-3xl mb-3 text-gray-500 ">
+                    <div class="flex-grow border-t border-gray-500"></div>
+                    <span class="flex-shrink mx-4">Register</span>
+                    <div class="flex-grow border-t border-gray-500"></div>
+                </h1>
+                <p class="text-gray-600">Create your account. It's free and only takes a minute.</p>
+            </div>
+            <form id="register-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" name="firstName" required
+                            class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="First Name">
+                    </div>
+                    <div>
+                        <input type="text" name="lastName" required
+                            class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Last Name">
+                    </div>
+                </div>
+                <div>
+                    <input type="email" name="email" required
+                        class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Email">
+                </div>
+                <div>
+                    <input type="password" name="password" required
+                        class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Password">
+                </div>
+                <div>
+                    <input type="password" name="confirmPassword" required
+                        class="w-full rounded-sm border p-3 outline-none duration-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Confirm Password">
+                </div>
+                <div class="mt-4">
+                    <button type="submit"
+                        class="w-full rounded-sm text-gray-200 font-semibold text-md py-2 transition duration-300 bg-gradient-to-t from-green-600 to-green-400  hover:from-green-700 hover:to-green-600">
+                        Register Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const elements = event.target.querySelectorAll('input')
+            const data = {}
+            for (let i = 0; i < elements.length; i++) {
+                data[elements[i].name] = elements[i].value
+            }
+            let div = document.getElementById('output')
+            if (!div) {
+                div = document.createElement('div')
+                div.id = 'output'
+                div.classList.add('bg-gray-300')
+                div.classList.add('p-4')
+                div.classList.add('mt-4')
+                event.target.parentNode.appendChild(div)
+            }
+            div.innerHTML = '';
+            const outputTextElement = document.createElement('pre');
+            outputTextElement.classList.add('text-pretty')
+            outputTextElement.innerText = JSON.stringify(data, null, 2)
+            div.append(outputTextElement)
+        });
+    </script>
+</body>
+
+</html>
