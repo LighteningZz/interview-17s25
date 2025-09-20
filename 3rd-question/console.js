@@ -19,7 +19,6 @@ function main() {
         }
         output = output.trim()
     }
-    rl.close();
     console.log(output)
 
 }
